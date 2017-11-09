@@ -1,3 +1,5 @@
+/lair/settingsLocal.py
+
 *.swp
 *.swo
 *.DS_Store

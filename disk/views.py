@@ -10,11 +10,11 @@ bucket_name = 'zjulibrary'
 
 
 def test(request):
-    ret, eof, info = bucket.list(bucket=bucket_name, prefix='assets/', marker=None, delimiter='/')
-    print(ret)
-    # print(info)
-    dirs = ret['commonPrefixes'] if 'commonPrefixes' in ret else []
-    files = ret['items'] if 'items' in ret else []
-    print(dirs)
-    print(files)
-    return render(request,'base.html')
+    # ret, eof, info = bucket.list(bucket=bucket_name, prefix='assets/', marker=None, delimiter='/')
+    # print(ret)
+    # # print(info)
+    # dirs = ret['commonPrefixes'] if 'commonPrefixes' in ret else []
+    # files = ret['items'] if 'items' in ret else []
+    # print(dirs)
+    # print(files)
+    return render(request,'main.html')

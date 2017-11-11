@@ -1,16 +1,17 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.conf import settings
 from qiniu import Auth
 from qiniu import BucketManager
 
 q = Auth(settings.QINIU['accessKey'], settings.QINIU['secretKey'])
 bucket = BucketManager(q)
-bucket_name = 'zjulibrary'
+bucketName = 'lair-test'
+bucketDomain = 'oz52zraao.bkt.clouddn.com'
 
 
 def fileList(request, prefix):
-    ret, eof, info = bucket.list(bucket=bucket_name, prefix=prefix, marker=None, delimiter='/')
+    ret, eof, info = bucket.list(bucket=bucketName, prefix=prefix, marker=None, delimiter='/')
     print(ret)
     # print(info)
     dirs=[]
@@ -23,7 +24,10 @@ def fileList(request, prefix):
     files = ret['items'] if 'items' in ret else []
     print(dirs)
     print(files)
-    crumbs=[]
+    crumbs=[{
+        'prefix': '',
+        'name': '/'
+    }]
     tempPrefix=''
     for p in prefix.split('/')[0:-1]:
         tempPrefix+=p+'/'
@@ -37,3 +41,10 @@ def fileList(request, prefix):
         'dirs': dirs,
         'files': files
     })
+
+
+def fileDownload(request, key):
+    baseUrl = 'http://%s/%s' % (bucketDomain, key)
+    privateUrl = q.private_download_url(baseUrl, expires=3600)
+    return HttpResponseRedirect(redirect_to=privateUrl)
+

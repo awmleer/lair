@@ -33,6 +33,7 @@
                         <th>Type</th>
                         <th>Size</th>
                         <th>Time</th>
+                        <th>Actions</th>
                         </thead>
                         <tbody>
                         {% for dir in dirs %}
@@ -48,6 +49,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                             </tr>
                         {% endfor %}
                         {% for file in files %}
@@ -59,6 +61,7 @@
                                 <td>{{ file.mimeType }}</td>
                                 <td>{{ file.fsize | fileSize }}</td>
                                 <td>{{ file.putTime | timeStampToString }}</td>
+                                <td><a class="btn btn-success" href="/disk/file/download/{{ file.key }}/" download>Download</a> </td>
                             </tr>
                         {% endfor %}
 

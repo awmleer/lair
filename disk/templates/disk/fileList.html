@@ -1,0 +1,74 @@
+{% extends 'main.html' %}
+
+{% load diskFilters %}
+
+{% block navbarBrand %}
+    Disk
+{% endblock %}
+
+{% block diskActive %}
+    active
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">
+                        {% for crumb in crumbs %}
+                            <a href="/disk/file/list/{{ crumb.prefix }}">
+                                {{ crumb.name }}
+                            </a>
+                            {% if not forloop.last %} > {% endif %}
+                        {% endfor %}
+                    </h4>
+{#                    <p class="category">Here is a subtitle for this table</p>#}
+                </div>
+                <div class="content table-responsive table-full-width">
+                    <table class="table table-striped">
+                        <thead>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Size</th>
+                        <th>Time</th>
+                        </thead>
+                        <tbody>
+                        {% for dir in dirs %}
+                            <tr>
+                                <td>
+                                    <i class="ti-folder"></i>
+                                </td>
+                                <td>
+                                    <a href="/disk/file/list/{{ dir.wholePath }}">
+                                        {{ dir.displayName }}
+                                    </a>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}
+                        {% for file in files %}
+                            <tr>
+                                <td>
+                                    <i class="ti-file"></i>
+                                </td>
+                                <td>{{ file.key | cutPrefix:prefix }}</td>
+                                <td>{{ file.mimeType }}</td>
+                                <td>{{ file.fsize }}B</td>
+                                <td>{{ file.putTime }}</td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}

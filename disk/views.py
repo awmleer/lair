@@ -9,12 +9,31 @@ bucket = BucketManager(q)
 bucket_name = 'zjulibrary'
 
 
-def test(request):
-    # ret, eof, info = bucket.list(bucket=bucket_name, prefix='assets/', marker=None, delimiter='/')
-    # print(ret)
-    # # print(info)
-    # dirs = ret['commonPrefixes'] if 'commonPrefixes' in ret else []
-    # files = ret['items'] if 'items' in ret else []
-    # print(dirs)
-    # print(files)
-    return render(request,'disk/list.html')
+def fileList(request, prefix):
+    ret, eof, info = bucket.list(bucket=bucket_name, prefix=prefix, marker=None, delimiter='/')
+    print(ret)
+    # print(info)
+    dirs=[]
+    if 'commonPrefixes' in ret:
+        for commonPrefix in ret['commonPrefixes']:
+            dirs.append({
+                'wholePath': commonPrefix,
+                'displayName': commonPrefix.replace(prefix,'',1)
+            })
+    files = ret['items'] if 'items' in ret else []
+    print(dirs)
+    print(files)
+    crumbs=[]
+    tempPrefix=''
+    for p in prefix.split('/')[0:-1]:
+        tempPrefix+=p+'/'
+        crumbs.append({
+            'prefix': tempPrefix,
+            'name': p
+        })
+    return render(request, 'disk/fileList.html',{
+        'crumbs': crumbs,
+        'prefix': prefix,
+        'dirs': dirs,
+        'files': files
+    })

@@ -17,4 +17,4 @@ def test(request):
     files = ret['items'] if 'items' in ret else []
     print(dirs)
     print(files)
-    return JsonResponse(ret)
+    return render(request,'base.html')

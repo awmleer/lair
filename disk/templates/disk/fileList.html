@@ -57,7 +57,7 @@
                                 </td>
                                 <td>{{ file.key | cutPrefix:prefix }}</td>
                                 <td>{{ file.mimeType }}</td>
-                                <td>{{ file.fsize }}B</td>
+                                <td>{{ file.fsize | fileSize }}</td>
                                 <td>{{ file.putTime }}</td>
                             </tr>
                         {% endfor %}

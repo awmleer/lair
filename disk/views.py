@@ -17,4 +17,4 @@ def test(request):
     # files = ret['items'] if 'items' in ret else []
     # print(dirs)
     # print(files)
-    return render(request,'main.html')
+    return render(request,'disk/list.html')

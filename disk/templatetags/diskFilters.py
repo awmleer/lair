@@ -1,4 +1,5 @@
 from django import template
+from django.utils import timezone
 
 register = template.Library()
 
@@ -17,3 +18,10 @@ def fileSize(value):
         return "%.1f K" % (value/1000)
     else:
         return "%d B" % value
+
+@register.filter(name='timeStampToString')
+def timeStampToString(value):
+    print(timezone.get_current_timezone())
+    t=timezone.datetime.fromtimestamp(int(value)/10000000,tz=timezone.get_current_timezone())
+    # t=timezone.localtime(t)
+    return t.strftime("%Y-%m-%d %H:%M:%S")

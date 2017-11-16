@@ -43,19 +43,19 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    <h4 class="modal-title" id="myModalLabel">File Upload</h4>
                 </div>
                 <div class="modal-body">
-                    Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.
+                    <p id="uploadStatusText" style="width: 100%;text-align: center;font-size: 30px">Uploading</p>
                 </div>
                 <div class="modal-footer">
-                    <div class="left-side">
-                        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Never mind</button>
+                    <div>
+                        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">OK</button>
                     </div>
-                    <div class="divider"></div>
-                    <div class="right-side">
-                        <button type="button" class="btn btn-danger btn-simple">Delete</button>
-                    </div>
+{#                    <div class="divider"></div>#}
+{#                    <div class="right-side">#}
+{#                        <button type="button" class="btn btn-danger btn-simple">Delete</button>#}
+{#                    </div>#}
                 </div>
             </div>
         </div>
@@ -143,6 +143,7 @@
                 },
                 'UploadComplete': function() {
                     //队列文件处理完毕后，处理相关的事情
+                    $('#uploadStatusText').text('Done');
                 },
                 'Key': function(up, file) {
                     // 若想在前端对每个文件的key进行个性化处理，可以配置该函数

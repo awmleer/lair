@@ -33,7 +33,8 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, a, .td
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   /*font-family: 'Muli', "Helvetica", Arial, sans-serif;*/
-  font-family: 'Open-Sans-Le69987d9b4995', "Helvetica", Arial, sans-serif;
+  /*font-family: 'Open-Sans-Le69987d9b4995', "Helvetica", Arial, sans-serif;*/
+  font-family: "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "Hiragi    no Sans GB", "Source Han Sans CN Normal", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Z    en Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
@@ -143,7 +144,8 @@ body {
   color: #66615b;
   font-size: 14px;
   /*font-family: 'Muli', Arial, sans-serif;*/
-  font-family: 'Open-Sans-Le69987d9b4995', "Helvetica", Arial, sans-serif;
+  /*font-family: 'Open-Sans-Le69987d9b4995', "Helvetica", Arial, sans-serif;*/
+  font-family: "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "Hiragi    no Sans GB", "Source Han Sans CN Normal", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Z    en Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
 }
 body .wrapper {
   min-height: 100vh;

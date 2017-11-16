@@ -9,11 +9,16 @@
 {% endblock %}
 
 {% block content %}
-    Upload file to <b>/{{ prefix }}</b>
-
+    <h3 style="text-align: center">
+        Upload file to <a href="/disk/file/list/{{ prefix }}" style="color: #66615b;"><b>/{{ prefix }}</b></a>
+    </h3>
     <div>
-        <div id="fileContainer" style="background: #a0a0a0; width: 100%;height: 200px;"></div>
-        <button id="pickFiles">Pick files</button>
+        <div id="fileContainer" style="background: rgb(222,221,217); width: 100%;height: 300px;display: flex;justify-content: center;align-items: center;">
+            <div style="text-align: center">
+                <button id="pickFiles" class="btn btn-fill btn-default btn-lg">Pick files</button>
+                <p style="margin-top: 10px">Or drag files here to upload</p>
+            </div>
+        </div>
     </div>
 
 {#    <div class="modal fade" id="uploadStatusModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: block; padding-left: 0px;">#}

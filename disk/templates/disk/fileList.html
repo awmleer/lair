@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="header">
-                    <h4 class="title">
+                    <h4 class="title" style="display: inline-block">
                         {% for crumb in crumbs %}
                             <a href="/disk/file/list/{{ crumb.prefix }}">
                                 {{ crumb.name }}
@@ -23,6 +23,9 @@
                             {% if not forloop.last %} > {% endif %}
                         {% endfor %}
                     </h4>
+                    <div style="float: right;">
+                        <a class="btn btn-default btn-fill" href="/disk/file/upload/{{ prefix }}">Upload</a>
+                    </div>
 {#                    <p class="category">Here is a subtitle for this table</p>#}
                 </div>
                 <div class="content table-responsive table-full-width">

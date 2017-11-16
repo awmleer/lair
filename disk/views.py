@@ -43,6 +43,12 @@ def fileList(request, prefix):
     })
 
 
+def fileUpload(request, prefix):
+    return render(request, 'disk/fileUpload.html', {
+        'prefix': prefix
+    })
+
+
 def fileDownload(request, key):
     baseUrl = 'http://%s/%s' % (bucketDomain, key)
     privateUrl = q.private_download_url(baseUrl, expires=3600)

@@ -6,12 +6,10 @@ from qiniu import BucketManager
 
 q = Auth(settings.QINIU['accessKey'], settings.QINIU['secretKey'])
 bucket = BucketManager(q)
-bucketName = 'lair-test'
-bucketDomain = 'oz52zraao.bkt.clouddn.com'
 
 
 def fileList(request, prefix):
-    ret, eof, info = bucket.list(bucket=bucketName, prefix=prefix, marker=None, delimiter='/')
+    ret, eof, info = bucket.list(bucket=settings.QINIU['bucketName'], prefix=prefix, marker=None, delimiter='/')
     print(ret)
     # print(info)
     dirs=[]
@@ -45,12 +43,20 @@ def fileList(request, prefix):
 
 def fileUpload(request, prefix):
     return render(request, 'disk/fileUpload.html', {
-        'prefix': prefix
+        'prefix': prefix,
+        'bucketDomain': settings.QINIU['bucketDomain']
+    })
+
+
+def uploadToken(request):
+    upToken = q.upload_token(bucket=settings.QINIU['bucketName'], expires=3600)
+    return JsonResponse({
+        'uptoken': upToken
     })
 
 
 def fileDownload(request, key):
-    baseUrl = 'http://%s/%s' % (bucketDomain, key)
+    baseUrl = 'http://%s/%s' % (settings.QINIU['bucketDomain'], key)
     privateUrl = q.private_download_url(baseUrl, expires=3600)
     return HttpResponseRedirect(redirect_to=privateUrl)
 

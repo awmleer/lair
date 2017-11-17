@@ -12,7 +12,7 @@ bucket = BucketManager(q)
 @require_http_methods(['GET'])
 def fileList(request, prefix):
     ret, eof, info = bucket.list(bucket=settings.QINIU['bucketName'], prefix=prefix, marker=None, delimiter='/')
-    print(ret)
+    # print(ret)
     # print(info)
     dirs=[]
     if 'commonPrefixes' in ret:
@@ -22,8 +22,8 @@ def fileList(request, prefix):
                 'displayName': commonPrefix.replace(prefix,'',1)
             })
     files = ret['items'] if 'items' in ret else []
-    print(dirs)
-    print(files)
+    # print(dirs)
+    # print(files)
     crumbs=[{
         'prefix': '',
         'name': '/'

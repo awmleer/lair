@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% load diskFilters %}
+
+{% block navbarBrand %}
+    Rename
+{% endblock %}
+
+{% block diskActive %}
+    active
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="content table-responsive table-full-width">
+                    Please enter the new name for {{  }}
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.views.decorators.http import require_http_methods
 from django.conf import settings
 from qiniu import Auth
 from qiniu import BucketManager
@@ -8,6 +9,7 @@ q = Auth(settings.QINIU['accessKey'], settings.QINIU['secretKey'])
 bucket = BucketManager(q)
 
 
+@require_http_methods(['GET'])
 def fileList(request, prefix):
     ret, eof, info = bucket.list(bucket=settings.QINIU['bucketName'], prefix=prefix, marker=None, delimiter='/')
     print(ret)
@@ -41,6 +43,7 @@ def fileList(request, prefix):
     })
 
 
+@require_http_methods(['GET'])
 def fileUpload(request, prefix):
     return render(request, 'disk/fileUpload.html', {
         'prefix': prefix,
@@ -48,6 +51,7 @@ def fileUpload(request, prefix):
     })
 
 
+@require_http_methods(['GET'])
 def uploadToken(request):
     upToken = q.upload_token(bucket=settings.QINIU['bucketName'], expires=3600)
     return JsonResponse({
@@ -55,8 +59,16 @@ def uploadToken(request):
     })
 
 
+@require_http_methods(['GET'])
 def fileDownload(request, key):
     baseUrl = 'http://%s/%s' % (settings.QINIU['bucketDomain'], key)
     privateUrl = q.private_download_url(baseUrl, expires=3600)
     return HttpResponseRedirect(redirect_to=privateUrl)
 
+
+@require_http_methods(['POST'])
+def fileRename(request):
+    
+    return render(request,'disk/fileRename.html',{
+
+    })

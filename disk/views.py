@@ -66,9 +66,17 @@ def fileDownload(request, key):
     return HttpResponseRedirect(redirect_to=privateUrl)
 
 
-@require_http_methods(['POST'])
-def fileRename(request):
-    
-    return render(request,'disk/fileRename.html',{
+@require_http_methods(['GET','POST'])
+def fileRename(request, key):
+    if request.method=='GET':
+        return render(request,'disk/fileRename.html',{
+            'key': key,
+            'fileName': key.split('/')[-1]
+        })
+    else:
+        path=''
+        for k in key.split('/')[:-1]:
+            path+=k+'/'
+        bucket.move(settings.QINIU['bucketName'], key, settings.QINIU['bucketName'], path+request.POST['newName'])
+        return HttpResponseRedirect(redirect_to='/disk/file/list/'+path)
 
-    })

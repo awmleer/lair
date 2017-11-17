@@ -13,12 +13,15 @@
 {% block content %}
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="content table-responsive table-full-width">
-                    Please enter the new name for {{  }}
-                    <input type="text" class="form-control">
-                </div>
-            </div>
+            <p>
+                Please enter the new name for <b>{{ fileName }}</b>
+            </p>
+            <form action="./" method="post">
+                {% csrf_token %}
+                <input type="text" class="form-control" style="width: 80%;max-width: 300px;" name="newName">
+                <br>
+                <button type="submit" class="btn btn-default btn-fill">Submit</button>
+            </form>
         </div>
 
 

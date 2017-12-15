@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^file/uploadToken/$',views.uploadToken),
     url(r'^file/rename/(?P<key>.+)/$',views.fileRename),
     url(r'^file/download/(?P<key>.+)/$',views.fileDownload),
+    url(r'^folder/create/(?P<prefix>.*)$',views.folderCreate),
 ]

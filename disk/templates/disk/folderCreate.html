@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+
+{% load diskFilters %}
+
+{% block navbarBrand %}
+    Create Folder
+{% endblock %}
+
+{% block diskActive %}
+    active
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                Creating a new folder at <b>/{{ prefix }}</b><br>
+                Please enter the new folder name
+            </p>
+            <form action="./" method="post">
+                {% csrf_token %}
+                <input type="text" class="form-control" style="width: 80%;max-width: 300px;" name="folderName">
+                <br>
+                <button type="submit" class="btn btn-default btn-fill">Create</button>
+            </form>
+        </div>
+
+
+    </div>
+{% endblock %}

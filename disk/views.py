@@ -80,3 +80,17 @@ def fileRename(request, key):
         bucket.move(settings.QINIU['bucketName'], key, settings.QINIU['bucketName'], path+request.POST['newName'])
         return HttpResponseRedirect(redirect_to='/disk/file/list/'+path)
 
+
+@require_http_methods(['GET','POST'])
+def folderCreate(request, prefix):
+    if request.method=='GET':
+        return render(request,'disk/folderCreate.html',{
+            'prefix': prefix
+        })
+    else:
+        folderName = request.POST.get('folderName')
+        if folderName is None:
+            return HttpResponseRedirect(redirect_to='/disk/file/list/' + prefix)
+        else:
+            # TODO add a '.' file
+            return HttpResponseRedirect(redirect_to='/disk/file/list/' + prefix + folderName + '/')

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from qiniu import Auth
 from qiniu import BucketManager
@@ -9,6 +10,7 @@ q = Auth(settings.QINIU['accessKey'], settings.QINIU['secretKey'])
 bucket = BucketManager(q)
 
 
+@login_required
 @require_http_methods(['GET'])
 def fileList(request, prefix):
     ret, eof, info = bucket.list(bucket=settings.QINIU['bucketName'], prefix=prefix, marker=None, delimiter='/')
@@ -43,6 +45,7 @@ def fileList(request, prefix):
     })
 
 
+@login_required
 @require_http_methods(['GET'])
 def fileUpload(request, prefix):
     return render(request, 'disk/fileUpload.html', {
@@ -51,6 +54,7 @@ def fileUpload(request, prefix):
     })
 
 
+@login_required
 @require_http_methods(['GET'])
 def uploadToken(request):
     upToken = q.upload_token(bucket=settings.QINIU['bucketName'], expires=3600)
@@ -59,6 +63,7 @@ def uploadToken(request):
     })
 
 
+@login_required
 @require_http_methods(['GET'])
 def fileDownload(request, key):
     baseUrl = 'http://%s/%s' % (settings.QINIU['bucketDomain'], key)
@@ -66,6 +71,7 @@ def fileDownload(request, key):
     return HttpResponseRedirect(redirect_to=privateUrl)
 
 
+@login_required
 @require_http_methods(['GET','POST'])
 def fileRename(request, key):
     if request.method=='GET':
@@ -81,6 +87,7 @@ def fileRename(request, key):
         return HttpResponseRedirect(redirect_to='/disk/file/list/'+path)
 
 
+@login_required
 @require_http_methods(['GET','POST'])
 def folderCreate(request, prefix):
     if request.method=='GET':

@@ -22,3 +22,9 @@ def login(request):
             })
         auth.login(request, user)
         return HttpResponseRedirect(redirect_to='/disk/file/list/')
+
+
+@require_http_methods(['GET'])
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect(redirect_to='/account/login/')

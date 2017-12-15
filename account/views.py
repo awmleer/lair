@@ -6,6 +6,8 @@ from django.views.decorators.http import require_http_methods
 
 @require_http_methods(['GET','POST'])
 def login(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(redirect_to='/disk/file/list/')
     if request.method=='GET':
         return render(request,'account/login.html')
     else:

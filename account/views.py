@@ -11,7 +11,7 @@ def login(request):
     else:
         username = request.POST.get('username')
         password = request.POST.get('password')
-        if username is None or password is None:
+        if username is None or password is None or username=='' or password=='':
             return render(request, 'account/login.html', {
                 'errorMessage': 'Username and password cannot be empty.'
             })
